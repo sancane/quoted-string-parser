@@ -4,7 +4,7 @@
 
 This crates implements a parser for text that meets the grammar for
 "quoted-string" as described in *SIP: Session Initiation Protocol*.
-[RFC3261](https://www.rfc-editor.org/rfc/rfc3261)
+[RFC 3261](https://www.rfc-editor.org/rfc/rfc3261)
 
 ```text
 quoted-string  =  SWS DQUOTE *(qdtext / quoted-pair ) DQUOTE
@@ -27,7 +27,7 @@ SP             =  %x20
 HTAB           =  %x09      ; horizontal tab
 ```
 
-ParThe QuotedStringParser object provides an simple API to validate that input text meets the "quoted-string" grammar.
+The `QuotedStringParser` object provides an simple API to validate that input text meets the "quoted-string" grammar.
 ```rust
 use quoted_string_parser::{QuotedStringParser, QuotedStringParseLevel};
 
@@ -40,7 +40,7 @@ assert!(QuotedStringParser::validate(
   QuotedStringParseLevel::QuotedString, "\"\\\u{7f}\""));
 ```
 
-QuotedStringParser derives from [Parser](https://docs.rs/pest/latest/pest/trait.Parser.html),
+`QuotedStringParser` derives from [Parser](https://docs.rs/pest/latest/pest/trait.Parser.html),
 if you need more control over the parser itself you can use any
 of the operations defined in the [pest](https://docs.rs/pest/latest/pest/)
 crate. Check the documentation for more information.
@@ -57,13 +57,13 @@ Patches and feedback are welcome.
 If you find this project helpful, you may consider making a donation:
 
 [![Donate with Bitcoin](https://en.cryptobadges.io/badge/micro/1EK28M4ht6qu7xFahTxuquXPzZSjCSGVBM)](https://en.cryptobadges.io/donate/1EK28M4ht6qu7xFahTxuquXPzZSjCSGVBM)
-[![Donate with Ethereum](https://en.cryptobadges.io/badge/micro/0xefa6404e5A50774117fd6204cbD33cf4454c67Fb)](https://en.cryptobadges.io/donate/0xefa6404e5A50774117fd6204cbD33cf4454c67Fb)
+[![Donate with `Ethereum`](https://en.cryptobadges.io/badge/micro/0xefa6404e5A50774117fd6204cbD33cf4454c67Fb)](https://en.cryptobadges.io/donate/0xefa6404e5A50774117fd6204cbD33cf4454c67Fb)
 
 # License
 
 This project is licensed under either of
 
 * Apache License, Version 2.0, (LICENSE-APACHE or https://www.apache.org/licenses/LICENSE-2.0)
-* MIT license (LICENSE-MIT or https://opensource.org/licenses/MIT) at your option.
+* [MIT license](https://opensource.org/licenses/MIT) at your option.
 
 [![say thanks](https://img.shields.io/badge/Say%20Thanks-👍-1EAEDB.svg)](https://github.com/sancane/quoted-string-parser/stargazers)
