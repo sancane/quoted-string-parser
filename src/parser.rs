@@ -13,7 +13,7 @@ use crate::pest::Parser;
 ///   QuotedStringParseLevel::QuotedString, "\"\\\u{7f}\""));
 ///```
 ///
-/// QuotedStringParser derives from [Parser](https://docs.rs/pest/latest/pest/trait.Parser.html),
+/// `QuotedStringParser` derives from [Parser](https://docs.rs/pest/latest/pest/trait.Parser.html),
 /// if you need more control over the parser itself you can use any
 /// of the operations defined in the [pest](https://docs.rs/pest/latest/pest/)
 /// crate. Check the documentation for more information.
@@ -36,9 +36,9 @@ impl QuotedStringParser {
 pub enum QuotedStringParseLevel {
     /// The whole quoted-string grammar.
     QuotedString,
-    /// Only sequences of qdtext / quoted-pair values. Some protocols
-    /// like Stun only checks sequences of qdtext and quoted-pairs
-    /// without the double quotes and their surrounding whitespaces.
+    /// Only sequences of `qdtext` / quoted-pair values. Some protocols
+    /// like Stun only checks sequences of `qdtext` and quoted-pairs
+    /// without the double quotes and their surrounding white spaces.
     QuotedText,
 }
 
@@ -53,7 +53,7 @@ mod tests {
         QuotedStringParser::parse(Rule::quoted_string, "\"\"")
             .expect("Could not parse QuotedString");
 
-        // qdtext
+        // `qdtext`
         QuotedStringParser::parse(Rule::quoted_string, "\"\u{21}\"")
             .expect("Could not parse QuotedString");
         QuotedStringParser::parse(Rule::quoted_string, "\"\u{23}\"")
@@ -65,7 +65,7 @@ mod tests {
         QuotedStringParser::parse(Rule::quoted_string, "\"\u{7e}\"")
             .expect("Could not parse QuotedString");
 
-        // qdtext (utf8_non_ascii)
+        // `qdtext` (`utf8_non_ascii`)
         QuotedStringParser::parse(Rule::quoted_string, "\"\u{c0}\u{80}\"")
             .expect("Could not parse QuotedString");
         QuotedStringParser::parse(Rule::quoted_string, "\"\u{df}\u{bf}\"")
@@ -107,7 +107,7 @@ mod tests {
         QuotedStringParser::parse(Rule::quoted_string, "\"\\\u{7f}\"")
             .expect("Could not parse QuotedString");
 
-        // quoted-string with series of qdtext and quoted-pair
+        // quoted-string with series of `qdtext` and quoted-pair
         QuotedStringParser::parse(Rule::quoted_string, "\"\\abcdfg\\h\"")
             .expect("Could not parse QuotedString");
         QuotedStringParser::parse(
@@ -116,7 +116,7 @@ mod tests {
         )
         .expect("Could not parse QuotedString");
 
-        // quoted string with CRLF and whitespaces
+        // quoted string with `CRLF` and white spaces
         QuotedStringParser::parse(Rule::quoted_string, "\"hello world\"")
             .expect("Could not parse QuotedString");
         QuotedStringParser::parse(Rule::quoted_string, "\" \u{0d}\u{0a}   hello\"")
@@ -125,7 +125,7 @@ mod tests {
 
     #[test]
     fn invalid_quoted_string() {
-        // qdtext (miss one ut8 cont. character)
+        // `qdtext` (miss one `utf8` cont. character)
         QuotedStringParser::parse(Rule::quoted_string, "\"\u{c0}\"")
             .expect_err("Parse should have failed");
         QuotedStringParser::parse(Rule::quoted_string, "\"\u{e0}\u{80}\"")
@@ -137,7 +137,7 @@ mod tests {
         QuotedStringParser::parse(Rule::quoted_string, "\"\u{fd}\u{80}\u{81}\u{82}\u{83}\"")
             .expect_err("Parse should have failed");
 
-        // qdtext (miss two ut8 cont. character)
+        // `qdtext` (miss two `utf8` cont. character)
         QuotedStringParser::parse(Rule::quoted_string, "\"\u{e0}\"")
             .expect_err("Parse should have failed");
         QuotedStringParser::parse(Rule::quoted_string, "\"\u{f7}\u{80}\"")
@@ -147,7 +147,7 @@ mod tests {
         QuotedStringParser::parse(Rule::quoted_string, "\"\u{fd}\u{80}\u{81}\u{82}\"")
             .expect_err("Parse should have failed");
 
-        // qdtext (miss three ut8 cont. character)
+        // `qdtext` (miss three `utf8` cont. character)
         QuotedStringParser::parse(Rule::quoted_string, "\"\u{f7}\"")
             .expect_err("Parse should have failed");
         QuotedStringParser::parse(Rule::quoted_string, "\"\u{f8}\u{80}\"")
@@ -155,13 +155,13 @@ mod tests {
         QuotedStringParser::parse(Rule::quoted_string, "\"\u{fd}\u{80}\u{81}\"")
             .expect_err("Parse should have failed");
 
-        // qdtext (miss four ut8 cont. character)
+        // `qdtext` (miss four `utf8` cont. character)
         QuotedStringParser::parse(Rule::quoted_string, "\"\u{fb}\"")
             .expect_err("Parse should have failed");
         QuotedStringParser::parse(Rule::quoted_string, "\"\u{fd}\u{80}\"")
             .expect_err("Parse should have failed");
 
-        // qdtext (miss five ut8 cont. character)
+        // `qdtext` (miss five `utf8` cont. character)
         QuotedStringParser::parse(Rule::quoted_string, "\"\u{fd}\"")
             .expect_err("Parse should have failed");
 
@@ -173,7 +173,7 @@ mod tests {
         QuotedStringParser::parse(Rule::quoted_string, "\"\\\u{8a}\"")
             .expect_err("Parse should have failed");
 
-        // lws failed with missinf LF character
+        // `lws` failed with missing `LF` character
         QuotedStringParser::parse(Rule::quoted_string, "\" \u{0d} hello\"")
             .expect_err("Parse should have failed");
     }

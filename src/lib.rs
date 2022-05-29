@@ -1,6 +1,6 @@
 //! This crates implements a parser for text that meets the grammar for
 //! "quoted-string" as described in *SIP: Session Initiation Protocol*.
-//! [RFC3261](https://www.rfc-editor.org/rfc/rfc3261)
+//! [RFC 3261](https://www.rfc-editor.org/rfc/rfc3261)
 //!
 //!```text
 //! quoted-string  =  SWS DQUOTE *(qdtext / quoted-pair ) DQUOTE
